@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Lokomotiv.Freeplan
+namespace DDev.Lokomotiv.Freeplan
 {
     public class Note
     {

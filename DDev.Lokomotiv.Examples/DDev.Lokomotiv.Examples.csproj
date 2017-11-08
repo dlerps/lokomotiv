@@ -6,6 +6,6 @@
     <Authors>Daniel Lerps</Authors>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lokomotiv\Lokomotiv.csproj" />
+    <ProjectReference Include="..\DDev.Lokomotiv\DDev.Lokomotiv.csproj" />
   </ItemGroup>
 </Project>

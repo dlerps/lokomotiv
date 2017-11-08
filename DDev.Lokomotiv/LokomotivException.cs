@@ -1,6 +1,6 @@
 using System;
 
-namespace Lokomotiv
+namespace DDev.Lokomotiv
 {
     public class LokomotivException : Exception
     {

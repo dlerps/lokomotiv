@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Globalization;
 
-using Lokomotiv.Net;
+using DDev.Lokomotiv.Net;
+using System.Linq;
 
-namespace Lokomotiv.Freeplan
+namespace DDev.Lokomotiv.Freeplan
 {
     public class DBFreeplanClient
     {
@@ -63,6 +64,34 @@ namespace Lokomotiv.Freeplan
 
         /// <summary>
         /// Returns all the arrivals for a station
+        /// CAUTION: This makes 2 API calls
+        /// </summary>
+        /// <param name="stationName">Name of the train station</param>
+        /// <param name="dateTime">Timestamp for the board</param>
+        /// <returns></returns>
+        public async Task<IList<TrainStationEvent>> GetArrivals(string stationName, DateTime dateTime)
+        {
+            var stations = await FindLocation(stationName);
+
+            if (stations.Any())
+                return await GetArrivals(stations[0].Id, dateTime);
+
+            return new List<TrainStationEvent>(0);
+        }
+
+        /// <summary>
+        /// Returns all the arrivals for a station for the current local time
+        /// CAUTION: This makes 2 API calls
+        /// </summary>
+        /// <param name="stationName">Name of the train station</param>
+        /// <returns></returns>
+        public async Task<IList<TrainStationEvent>> GetArrivals(string stationName)
+        {
+            return await GetArrivals(stationName, DateTime.Now);
+        }
+
+        /// <summary>
+        /// Returns all the arrivals for a station
         /// </summary>
         /// <param name="stationId">Id of the train station</param>
         /// <param name="dateTime">Timestamp for the board</param>
@@ -81,20 +110,48 @@ namespace Lokomotiv.Freeplan
         {
             return await GetArrivals(stationId, DateTime.Now);
         }
+
+        /// <summary>
+        /// Returns all the departures for a station
+        /// CAUTION: This makes 2 API calls
+        /// </summary>
+        /// <param name="stationName">Name of the train station</param>
+        /// <param name="dateTime">Timestamp for the board</param>
+        /// <returns></returns>
+        public async Task<IList<TrainStationEvent>> GetDepartures(string stationName, DateTime dateTime)
+        {
+            var stations = await FindLocation(stationName);
+
+            if (stations.Any())
+                return await GetDepartures(stations[0].Id, dateTime);
+
+            return new List<TrainStationEvent>(0);
+        }
+
+        /// <summary>
+        /// Returns all the departures for a station for the current local time
+        /// CAUTION: This makes 2 API calls
+        /// </summary>
+        /// <param name="stationName">Name of the train station</param>
+        /// <returns></returns>
+        public async Task<IList<TrainStationEvent>> GetDepartures(string stationName)
+        {
+            return await GetDepartures(stationName, DateTime.Now);
+        }
         
         /// <summary>
-        /// Returns all the depatures for a station
+        /// Returns all the departures for a station
         /// </summary>
         /// <param name="stationId">Id of the train station</param>
         /// <param name="dateTime">Timestamp for the board</param>
         /// <returns></returns>
         public async Task<IList<TrainStationEvent>> GetDepartures(long stationId, DateTime dateTime)
         {
-            return await GetTrainStationEvents(stationId, dateTime, "depatureBoard");
+            return await GetTrainStationEvents(stationId, dateTime, "departureBoard");
         }
         
         /// <summary>
-        /// Returns all depatures for a particular station for the current local time
+        /// Returns all departures for a particular station for the current local time
         /// </summary>
         /// <param name="stationId">Id of the train station</param>
         /// <returns></returns>

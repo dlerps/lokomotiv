@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-using Lokomotiv;
-using Lokomotiv.Freeplan;
+using DDev.Lokomotiv;
+using DDev.Lokomotiv.Freeplan;
 
-namespace Lokomotiv.Examples
+namespace DDev.Lokomotiv.Examples
 {
     class LokomotiveExample
     {
@@ -14,8 +15,8 @@ namespace Lokomotiv.Examples
         static void Main(string[] args)
         {
             _freeplanClient = new DBFreeplanClient();
-            
-            Task.Run(() => FindLocation("Hamburg"))
+
+            Task.Run(() => GetArrivals("Altona"))
                 .GetAwaiter()
                 .GetResult();
         }
@@ -26,6 +27,17 @@ namespace Lokomotiv.Examples
             
             foreach(TrainStation station in locations)
                 Console.WriteLine($"{station.Name} ({station.Latitude}, {station.Longitude})");
+        }
+
+        private static async Task GetArrivals(string loc)
+        {
+            IList<TrainStationEvent> board = await _freeplanClient.GetArrivals(loc);
+
+            if (board.Any())
+                Console.WriteLine(board[0].TrainStationName + "\n-------");
+
+            foreach (TrainStationEvent tse in board)
+                Console.WriteLine($"{tse.TrainNumber} from {tse.Origin} at {tse.DateTime:HH:MM} on platform {tse.Platform}");
         }
     }
 }
