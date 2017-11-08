@@ -1,8 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0,netstandard1.3</TargetFrameworks>
-    <Author>Daniel Lerps</Author>
+    <TargetFrameworks>netstandard2.0;netstandard1.3</TargetFrameworks>
+    <Authors>Daniel Lerps</Authors>
+    <Company />
+    <Product />
+    <Description>Collection of tools and utilities for collections, Linq and debug outputs.</Description>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/dlerps/lokomotiv/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/dlerps/lokomotiv</PackageProjectUrl>
+    <RepositoryType>https://github.com/dlerps/lokomotiv</RepositoryType>
+    <PackageTags>deutsche bahn,bahn,timetable,library,public transport</PackageTags>
+    <Version>0.0.1</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
 </Project>
