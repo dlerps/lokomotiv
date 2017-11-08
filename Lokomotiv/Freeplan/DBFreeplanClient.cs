@@ -26,6 +26,8 @@ namespace Lokomotiv.Freeplan
         public DBFreeplanClient(string apiAccessToken)
         {
             _http = new HttpClient();
+            _http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "UTF-8");
+
             _apiBaseUrl = "https://api.deutschebahn.com/";
             _apiBasePath = "freeplan/v1/";
 
@@ -40,6 +42,11 @@ namespace Lokomotiv.Freeplan
 
         #region Locations
 
+        /// <summary>
+        /// Looks up train stations by location name
+        /// </summary>
+        /// <param name="locName">Location search term</param>
+        /// <returns></returns>
         public async Task<IList<TrainStation>> FindLocation(string locName)
         {
             if (String.IsNullOrWhiteSpace(locName))
@@ -54,26 +61,55 @@ namespace Lokomotiv.Freeplan
 
         #region Arrivals & Departures
 
+        /// <summary>
+        /// Returns all the arrivals for a station
+        /// </summary>
+        /// <param name="stationId">Id of the train station</param>
+        /// <param name="dateTime">Timestamp for the board</param>
+        /// <returns></returns>
         public async Task<IList<TrainStationEvent>> GetArrivals(long stationId, DateTime dateTime)
         {
             return await GetTrainStationEvents(stationId, dateTime, "arrivalBoard");
         }
         
+        /// <summary>
+        /// Returns all arrivals for a particular station for the current local time
+        /// </summary>
+        /// <param name="stationId">Id of the train station</param>
+        /// <returns></returns>
         public async Task<IList<TrainStationEvent>> GetArrivals(long stationId)
         {
             return await GetArrivals(stationId, DateTime.Now);
         }
         
+        /// <summary>
+        /// Returns all the depatures for a station
+        /// </summary>
+        /// <param name="stationId">Id of the train station</param>
+        /// <param name="dateTime">Timestamp for the board</param>
+        /// <returns></returns>
         public async Task<IList<TrainStationEvent>> GetDepartures(long stationId, DateTime dateTime)
         {
             return await GetTrainStationEvents(stationId, dateTime, "depatureBoard");
         }
         
+        /// <summary>
+        /// Returns all depatures for a particular station for the current local time
+        /// </summary>
+        /// <param name="stationId">Id of the train station</param>
+        /// <returns></returns>
         public async Task<IList<TrainStationEvent>> GetDepartures(long stationId)
         {
             return await GetDepartures(stationId, DateTime.Now);
         }
 
+        /// <summary>
+        /// Inyternal method to retrieve depatures and arrivals
+        /// </summary>
+        /// <param name="stationId">Id of the train station</param>
+        /// <param name="dateTime">The timestamp for the request</param>
+        /// <param name="endpoint">arrivalBoard or depatureBoard</param>
+        /// <returns></returns>
         private async Task<IList<TrainStationEvent>> GetTrainStationEvents(
             long stationId, 
             DateTime dateTime, 
@@ -89,6 +125,11 @@ namespace Lokomotiv.Freeplan
 
         #region Journeys
 
+        /// <summary>
+        /// Returns the details of a journey.
+        /// </summary>
+        /// <param name="detailsId">The journey id can be retrieved from a arrival/depature list</param>
+        /// <returns></returns>
         public async Task<IList<JourneyEvent>> GetJourneyDetails(string detailsId)
         {
             if (String.IsNullOrWhiteSpace(detailsId))

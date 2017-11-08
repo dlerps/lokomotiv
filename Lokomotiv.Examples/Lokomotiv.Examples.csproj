@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Authors>Daniel Lerps</Authors>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lokomotiv\Lokomotiv.csproj" />
+  </ItemGroup>
+</Project>
