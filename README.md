@@ -29,4 +29,10 @@ IList<TrainStation> locations = await client.FindLocation("Hamburg");
 IList<TrainStationEvent> arrivals = await client.GetArrivals("Berlin", new DateTime(2017, 11, 20));
 ```
 
-## Contribution
+## Development
+
+This library is developed & maintained by *Daniel Lerps*.
+
+This is an open-source library under the MIT license. Feel free to fork this repository and add pull request if you want to contribute.
+
+Check [Deutsche Bahn APIs](https://developer.deutschebahn.com/store/apis/list) to see which other APIs are available and still need clients.
