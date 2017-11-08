@@ -10,7 +10,7 @@
     <PackageProjectUrl>https://github.com/dlerps/lokomotiv</PackageProjectUrl>
     <RepositoryType>https://github.com/dlerps/lokomotiv</RepositoryType>
     <PackageTags>deutsche bahn,bahn,timetable,library,public transport</PackageTags>
-    <Version>1.1.0</Version>
+    <Version>1.1.3</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

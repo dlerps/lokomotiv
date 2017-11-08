@@ -17,6 +17,10 @@ This section includes exmaples of how to use the API clients. First you need to 
 dotnet add package DDev.Lokomotiv
 ```
 
+```
+Install-Package DDev.Lokomotiv
+```
+
 #### DBFreeplanClient
 
 ```CSharp
