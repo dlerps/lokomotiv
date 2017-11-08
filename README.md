@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/a4yu46cpnw9iowix?svg=true)](https://ci.appveyor.com/project/dlerps/lokomotiv) [![NuGet](https://img.shields.io/nuget/dt/DDev.Lokomotiv.svg)](https://www.nuget.org/packages/DDev.Lokomotiv/)
+
+
 # DDev Lokomotiv (C# Deutsche Bahn API clients)
 A dotnet core library for the open APIs of **Deutsche Bahn**. At this moment it only has a client for the Freeplan API (Fahrplan-Free). There are plans to add more clients for the DB API suite.
 
